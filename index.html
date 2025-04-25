@@ -1,13 +1,107 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task List</title>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos directamente en el HTML -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus, button:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            input, button {
+                font-size: 14px;
+            }
+
+            ul {
+                width: 100%;
+            }
+
+            li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Task List</h1>
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyAJh72CIA1_uYvWBgVMRxy3uW9WUOrCFaU",
@@ -19,100 +113,6 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        #taskInput {
-            padding: 10px;
-            width: 300px;
-            margin-right: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin-left: 5px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #taskList {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        #taskList li {
-            background-color: #fff;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            word-wrap: break-word; /* Para que el texto no se rompa en varias líneas */
-        }
-
-        #taskList li span {
-            flex: 1;
-            font-size: 16px;
-            overflow: hidden; /* Evitar que el texto se salga de los límites */
-            text-overflow: ellipsis; /* Añadir puntos suspensivos si el texto es demasiado largo */
-            white-space: nowrap; /* Impide que el texto se rompa */
-        }
-
-        #taskList li button {
-            margin-left: 5px;
-            font-size: 12px;
-        }
-
-        .completed {
-            text-decoration: line-through;
-            color: #888;
-        }
-
-        .task-checkbox {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div>
-        <h1>Task List</h1>
-        <input type="text" id="taskInput" placeholder="Enter task">
-        <button onclick="addTask()">Add Task</button>
-        <ul id="taskList"></ul>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
